@@ -6,34 +6,34 @@ import json
 import sys
 
 class SiteReview(object):
-    def __init__(self):
-        self.baseurl = "http://sitereview.bluecoat.com/rest/categorization"
-        self.useragent = {"User-Agent": "Mozilla/5.0"}
+	def __init__(self):
+		self.baseurl = "http://sitereview.bluecoat.com/rest/categorization"
+		self.useragent = {"User-Agent": "Mozilla/5.0"}
 
-    def sitereview(self, url):
-        payload = {"url": url}
-        
-        try:
-            self.req = requests.post(
-                                    self.baseurl,
-                                    headers=self.useragent,
-                                    data=payload
-                                    )
-        except requests.ConnectionError:
-            sys.exit("[-] ConnectionError: " \
-                     "A connection error occurred")
+	def sitereview(self, url):
+		payload = {"url": url}
 
-        return json.loads(self.req.content)
+		try:
+			self.req = requests.post(
+									self.baseurl,
+									headers=self.useragent,
+									data=payload
+									)
+		except requests.ConnectionError:
+			sys.exit("[-] ConnectionError: " \
+					 "A connection error occurred")
 
-    def check_response(self, response):
+		return json.loads(self.req.content)
 
-        if self.req.status_code != 200:
-            sys.exit("[-] HTTP {} returned".format(req.status_code))
+	def check_response(self, response):
 
-        elif "error" in response:
-            sys.exit(response["error"])
+		if self.req.status_code != 200:
+			sys.exit("[-] HTTP {} returned".format(req.status_code))
 
-        else:
+		elif "error" in response:
+			sys.exit(response["error"])
+
+		else:
 			begin = response["categorization"].find("\">")
 			end = response["categorization"].find("</a>")            
 			self.category = response["categorization"][begin+2:end]
@@ -43,9 +43,9 @@ class SiteReview(object):
 
 class BCPlugin(WillPlugin):
 
-    @respond_to("ip (?P<ip_addr>.*)")
-    def check_bc(self, message, ip_addr):
-     	
+	@respond_to("ip (?P<ip_addr>.*)")
+	def check_bc(self, message, ip_addr):
+
 		s = SiteReview()
 		response = s.sitereview(ip_addr)
 
@@ -56,6 +56,3 @@ class BCPlugin(WillPlugin):
 			reply = "Category: " + s.category + "\n"+ s.date
 
 		self.reply(message, "\nBluecoat site review:\n"+reply)
-
-
-
