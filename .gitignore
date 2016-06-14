@@ -5,7 +5,7 @@ shelf.db
 Procfile
 config.py
 dump.rdb
-pip.selfcheck.json
+pip-selfcheck.json
 run_will.py
 
 bin/
