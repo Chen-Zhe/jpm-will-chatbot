@@ -1,7 +1,0 @@
-#!/bin/bash
-# This hook is sourced after this virtualenv is activated.
-#export WILL_USERNAME=594671_4042049@chat.hipchat.com
-#export WILL_PASSWORD=willjpmc
-#export WILL_V2_TOKEN=OoC5C8HnET5dv1uX63eCzgxucaaxaSmJFkp91zBY
-#export WILL_V2_TOKEN=hkchJmgEx0fB0B1qjYQIRtw5sPrzQQalbTY4y9nn
-#export WILL_V2_TOKEN=0c40V9i3KMilBClP1uqPRqhcd2CowjNNLKfp9a1j
