@@ -5,10 +5,13 @@ import requests
 import json
 import sys
 
+
 class SiteReview(object):
     def __init__(self):
         self.baseurl = "http://sitereview.bluecoat.com/rest/categorization"
         self.useragent = {"User-Agent": "Mozilla/5.0"}
+        self.category = ""
+        self.date = ""
 
     def sitereview(self, url):
         payload = {"url": url}
