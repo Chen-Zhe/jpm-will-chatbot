@@ -1,2 +1,3 @@
+# will-chatbot
 
-This is our bot, a [will](https://github.com/skoczen/will) bot.
+This is a bot, a will bot.

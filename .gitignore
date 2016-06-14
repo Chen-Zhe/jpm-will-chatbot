@@ -2,6 +2,7 @@
 pip-log.txt
 shelf.db
 
+.project
 Procfile
 config.py
 dump.rdb
