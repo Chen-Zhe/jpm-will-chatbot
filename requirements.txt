@@ -1,1 +1,4 @@
 will
+virustotal-api
+requests
+requests[security]
