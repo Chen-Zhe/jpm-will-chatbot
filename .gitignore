@@ -2,8 +2,15 @@
 pip-log.txt
 shelf.db
 
+Procfile
+config.py
+dump.rdb
+pip.selfcheck.json
+run_will.py
+
 bin/
 cherrypy/
 include/
 lib/
 local/
+.idea/
