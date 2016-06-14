@@ -56,3 +56,4 @@ class BCPlugin(WillPlugin):
 			reply = "Category: " + s.category + "\n"+ s.date
 
 		self.reply(message, "\nBluecoat site review:\n"+reply)
+		
