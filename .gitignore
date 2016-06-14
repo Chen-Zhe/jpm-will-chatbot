@@ -1,4 +1,9 @@
 *.py[cod]
 pip-log.txt
 shelf.db
-    
+
+bin/
+cherrypy/
+include/
+lib/
+local/
