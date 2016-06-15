@@ -15,4 +15,4 @@ class PTPlugin(WillPlugin):
                             data={"url": url, "format": "json",
                                   "app_key": "a44346b8167abe4ab6e177f0afe21f0628c57facaba5699085a7a1400b3e2789"}).text
 
-        self.reply(message, json.loads(response))
+        self.reply(message, response)

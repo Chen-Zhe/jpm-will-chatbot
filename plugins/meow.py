@@ -7,5 +7,5 @@ class MeowPlugin(WillPlugin):
     @respond_to("^meow")
     def meow(self, message):
         self.reply(message, "meow meow meow!")
- 
+
 

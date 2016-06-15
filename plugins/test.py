@@ -7,5 +7,5 @@ class TestMePlugin(WillPlugin):
     @respond_to("^testme")
     def testme(self, message):
         self.reply(message, message)
- 
+
 
