@@ -5,14 +5,17 @@ import requests
 import json
 import sys
 
+
 class SiteReview(object):
     def __init__(self):
         self.baseurl = "http://sitereview.bluecoat.com/rest/categorization"
         self.useragent = {"User-Agent": "Mozilla/5.0"}
+        self.category = ""
+        self.date = ""
 
     def sitereview(self, url):
         payload = {"url": url}
-        
+
         try:
             self.req = requests.post(
                                     self.baseurl,
@@ -34,28 +37,25 @@ class SiteReview(object):
             sys.exit(response["error"])
 
         else:
-			begin = response["categorization"].find("\">")
-			end = response["categorization"].find("</a>")            
-			self.category = response["categorization"][begin+2:end]
-			end = response["ratedate"].find("<")
-			self.date = response["ratedate"][:end]
+            begin = response["categorization"].find("\">")
+            end = response["categorization"].find("</a>")
+            self.category = response["categorization"][begin+2:end]
+            end = response["ratedate"].find("<")
+            self.date = response["ratedate"][:end]
 
 
 class BCPlugin(WillPlugin):
 
     @respond_to("ip (?P<ip_addr>.*)")
     def check_bc(self, message, ip_addr):
-     	
-		s = SiteReview()
-		response = s.sitereview(ip_addr)
 
-		reply = "This site has not yet been rated!"
+        s = SiteReview()
+        response = s.sitereview(ip_addr)
 
-		if not response["unrated"]:
-			s.check_response(response)
-			reply = "Category: " + s.category + "\n"+ s.date
+        reply = "This site has not yet been rated!"
 
-		self.reply(message, "\nBluecoat site review:\n"+reply)
+        if not response["unrated"]:
+            s.check_response(response)
+            reply = "Category: " + s.category + "\n"+ s.date
 
-
-
+        self.reply(message, "\nBluecoat site review:\n"+reply)

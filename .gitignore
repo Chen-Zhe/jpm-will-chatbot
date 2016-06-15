@@ -5,13 +5,7 @@ shelf.db
 .project
 Procfile
 config.py
-dump.rdb
-pip-selfcheck.json
+
 run_will.py
 
-bin/
-cherrypy/
-include/
-lib/
-local/
 .idea/
