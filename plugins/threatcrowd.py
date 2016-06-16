@@ -16,13 +16,11 @@ class threatcrowdemail(WillPlugin):
 
             count = len(j['domains'])
 
-            i=1
-            k=count-1
-            domainlist = ""
-            while k>=0 and i<=5:
-                domainlist = domainlist + j['domains'][k] +"\n"
-                i+=1
-                k-=1
+            end = 5
+            if len(j["domains"])<5:
+                end = len(j["domains"])
+            domainlist = "\n".join(j["domains"][0:end])
+
 
             response = "Threatcrowd result: \n" + "Total number of Domain = " + str(count) + "\n" +"Most recently registered domain: \n" + domainlist
 
