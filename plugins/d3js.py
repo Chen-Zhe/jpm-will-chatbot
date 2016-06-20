@@ -4,7 +4,7 @@ from will.decorators import respond_to, periodic, hear, randomly, route, rendere
 
 class D3visualizationPlugin(WillPlugin):
 
-    @route("/d3draw?user=")
+    @route("/d3draw")
     @rendered_template("d3.html")
     def renderD3(self):
         return {}
