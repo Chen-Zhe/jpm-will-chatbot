@@ -7,7 +7,7 @@ class threatcrowdemail(WillPlugin):
 
 
 
-    @respond_to("email (?P<input>.*)")
+    @hear("~email (?P<input>.*)")
     def check_email(self, message, input):
         result = requests.get("https://www.threatcrowd.org/searchApi/v2/email/report/", params={"email": input})
         j = json.loads(result.text)
