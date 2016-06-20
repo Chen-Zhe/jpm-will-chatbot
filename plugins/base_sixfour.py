@@ -6,8 +6,7 @@ from will.decorators import respond_to, periodic, hear, randomly, route, rendere
 class BaseSixFourPlugin(WillPlugin):
 
     # Function names should be lowercase, with words separated by underscores as necessary to improve readability.
-    # @respond_to("^base64 (?P<cmd>[\S*]+) (?P<text.*)")
-    @hear("~b64 (?P<text>^base64.*)")
+    #@hear("^~b64 (?P<cmd>[\S*]+) (?P<text.*)")
     def base_six_four(self, message, text):
         text_arr = text.split()
         if len(text_arr) < 3:
