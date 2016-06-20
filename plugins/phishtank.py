@@ -7,7 +7,7 @@ import base64
 
 class PTPlugin(WillPlugin):
 
-    @respond_to("url (?P<url>.*)")
+    @hear("~url (?P<url>.*)")
     def check_phishing(self, message, url):
         if url.find("http://")==-1:
             url = "http://"+ url
