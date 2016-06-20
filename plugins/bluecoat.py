@@ -46,7 +46,8 @@ class SiteReview(object):
 
 class BCPlugin(WillPlugin):
 
-    @respond_to("ip (?P<ip_addr>.*)")
+    @hear("~ip (?P<ip_addr>.*)")
+    @hear("~url (?P<ip_addr>.*)")
     def check_bc(self, message, ip_addr):
 
         s = SiteReview()
