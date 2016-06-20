@@ -45,16 +45,22 @@ class SiteReview(object):
 
 class BCPlugin(WillPlugin):
 
-    @hear("~(ip|url) (?P<site_address>.*)")
-    def check_bc(self, message, site_address):
+    @hear("~(ip|url)(-bc)? (?P<input>.*)")
+    def check_bc(self, message, input):
 
+        input_list = [input_item.strip() for input_item in input.split(',')]
         s = SiteReview()
-        response = s.sitereview(site_address)
 
-        reply = "This site has not yet been rated!"
+        for site in input_list:
 
-        if not response["unrated"]:
-            s.check_response(response)
-            reply = "Category: " + s.category + "\nLast Time Rated/Reviewed:"+ s.date
+            response = s.sitereview(site)
+            reply = "URL: {site} \n"\
+                    "This site has not yet been rated.".format(site = site.replace(":","[:]").replace(".","[.]"))
+            if not response["unrated"]:
+                s.check_response(response)
+                reply = "URL: {site} \n"\
+                        "Category: {category} \n " \
+                        "Last time rated/reviewed: {time}".format(site = site.replace(":","[:]").replace(".","[.]"), category = s.category, time = s.date.strip())
 
-        self.reply(message, "\nBluecoat site review:\n"+reply)
+
+            self.reply(message, "Bluecoat Scan Result\n" + reply)

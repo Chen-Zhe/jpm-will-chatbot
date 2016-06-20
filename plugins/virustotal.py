@@ -10,7 +10,7 @@ class VT_UrlPlugin(WillPlugin):
 	def __init__(self):
 		self.API_KEY = '87ab79d0a21d9a7ae5c5558969c7d6b38defa1901b77d27796ae466b3823c776'
 
-	@hear("~(url|ip) (?P<input>.*)")
+	@hear("~(url|ip)(-vt)? (?P<input>.*)")
 	def check_url(self, message, input):
 		vt = VirusTotalPublicApi(self.API_KEY)
 		try:
@@ -36,7 +36,7 @@ class VT_HashPlugin(WillPlugin):
 	def __init__(self):
 		self.API_KEY = '87ab79d0a21d9a7ae5c5558969c7d6b38defa1901b77d27796ae466b3823c776'
 
-	@hear("~hash (?P<input>.*)")
+	@hear("~hash(-vt)? (?P<input>.*)")
 	def check_url(self, message, input):
 		vt = VirusTotalPublicApi(self.API_KEY)
 		try:
