@@ -21,17 +21,15 @@ class threatcrowdemail(WillPlugin):
                 end = len(j["domains"])
             domainlist = "\n".join(j["domains"][0:end])
 
-
             response = "Threatcrowd result: \n" + "Total number of Domain = " + str(count) + "\n" +"Most recently registered domain: \n" + domainlist
 
         else:
             response = "Threatcrowd result: \n" + "Total number of Domain = 0"
 
         self.reply(message, response)
-        #print response
 
 
 
-#s = threatcrowdemail()
-#s.check_email("eee","domainregistration@jpmchase.com")
+s = threatcrowdemail()
+s.check_email("eee","domainregistration@jpmchase.com")
 

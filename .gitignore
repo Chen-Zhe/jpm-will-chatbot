@@ -9,3 +9,6 @@ config.py
 run_will.py
 
 .idea/
+
+dump.rdb
+nohup.out
