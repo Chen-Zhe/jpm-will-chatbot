@@ -7,25 +7,27 @@ import base64
 
 class PTPlugin(WillPlugin):
 
-    @respond_to("url (?P<url>.*)")
-    def check_phishing(self, message, url):
-        if url.find("http://")==-1:
-            url = "http://"+ url
+    @hear("~url(-pt)? (?P<input>.*)")
+    def check_phishing(self, message, input):
 
-        response = requests.post("http://checkurl.phishtank.com/checkurl/",
-                            data={"url":base64.b64encode(url.encode("utf-8")), "format": "json",
-                                  "app_key": "a44346b8167abe4ab6e177f0afe21f0628c57facaba5699085a7a1400b3e2789"}
-                                 ).text
+        input_list = [input_item.strip() for input_item in input.split(',')]
 
-        json_response = json.loads(response)
+        for site in input_list:
+            if site.find("http://")==-1:
+                site = "http://"+ site
 
-        success=json_response["meta"]["success"]
+            response = requests.post("http://checkurl.phishtank.com/checkurl/",
+                                     data={"url":base64.b64encode(site.encode("utf-8")), "format": "json",
+                                           "app_key": "a44346b8167abe4ab6e177f0afe21f0628c57facaba5699085a7a1400b3e2789"}
+                                    ).text
 
-        reply="\nPhishtank Report\nURL/URI: "+url\
-              +"\nTimestamp"+str(json_response["meta"]["timestamp"])\
-              +"\nSuccess: "+str(success)
+            json_response = json.loads(response)
+            success=json_response["meta"]["status"]
+            reply="PhishTank Scan Result \n" \
+                  "URL: {site} \n" \
+                  "Timestamp: {timestamp} \n".format(site = site.replace(":", "[:]").replace(".", "[.]"), timestamp = str(json_response["meta"]["timestamp"]))
 
-        if success:
-            reply+="\nConfirmed Phishing Site? "+str(json_response["results"]["in_database"])
+            if success:
+                reply += "Is phishing site: " + str(json_response["results"]["in_database"])
 
-        self.reply(message, response)
+            self.reply(message, reply)

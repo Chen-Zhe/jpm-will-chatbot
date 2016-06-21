@@ -7,29 +7,34 @@ class threatcrowdemail(WillPlugin):
 
 
 
-    @respond_to("email (?P<input>.*)")
+    @hear("~email(-tc)? (?P<input>.*)")
     def check_email(self, message, input):
-        result = requests.get("https://www.threatcrowd.org/searchApi/v2/email/report/", params={"email": input})
-        j = json.loads(result.text)
 
-        if j['response_code']=="1":
+        input_list = [input_item.strip() for input_item in input.split(',')]
+        for email in input_list:
+            result = requests.get("https://www.threatcrowd.org/searchApi/v2/email/report/", params={"email": email})
+            j = json.loads(result.text)
 
-            count = len(j['domains'])
+            if j['response_code']=="1":
 
-            end = 5
-            if len(j["domains"])<5:
-                end = len(j["domains"])
-            domainlist = "\n".join(j["domains"][0:end])
+                count = len(j['domains'])
 
-            response = "Threatcrowd result: \n" + "Total number of Domain = " + str(count) + "\n" +"Most recently registered domain: \n" + domainlist
-
-        else:
-            response = "Threatcrowd result: \n" + "Total number of Domain = 0"
-
-        self.reply(message, response)
+                end = 5
+                if len(j["domains"])<5:
+                    end = len(j["domains"])
+                domainlist = ", ".join(j["domains"][0:end])
 
 
+                response = "ThreatCrowd Scan Result\n" + "Email: " + email.replace(".", "[.]") + "\nTotal number of domains: " + str(count) + "\n" +"Most recently registered domains: " + domainlist
 
-s = threatcrowdemail()
-s.check_email("eee","domainregistration@jpmchase.com")
+            else:
+                response = "ThreatCrowd Scan Result\n" + "Email: " + email.replace(".", "[.]") + "\nTotal number of Domains: 0"
+
+            self.reply(message, response)
+        #print response
+
+
+
+#s = threatcrowdemail()
+#s.check_email("eee","domainregistration@jpmchase.com")
 
