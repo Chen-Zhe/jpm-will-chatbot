@@ -3,7 +3,7 @@ from will.decorators import respond_to, periodic, hear, randomly, route, rendere
 import requests
 import re
 import json
-class Whois(WillPlugin):
+class whois(WillPlugin):
 
     @hear("~whois (?P<text>.*)")
     def check_whois(self, message, text):
