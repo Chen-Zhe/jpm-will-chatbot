@@ -142,16 +142,16 @@ def find_result(X, k):
 
 
 
-result = find_result(coords,K)
+result.save = find_result(coords,K)
 
-print result[0].x_coordinate
-print result[0].y_coordinate
-print result[0].cluster
-print result[0].domain_name
-print result[0].is_center
+#print result[0].x_coordinate
+#print result[0].y_coordinate
+#print result[0].cluster
+#print result[0].domain_name
+#print result[0].is_center
 
-print result[11].x_coordinate
-print result[11].y_coordinate
-print result[11].cluster
-print result[11].domain_name
-print result[11].is_center
+#print result[11].x_coordinate
+#print result[11].y_coordinate
+#print result[11].cluster
+#print result[11].domain_name
+#print result[11].is_center
