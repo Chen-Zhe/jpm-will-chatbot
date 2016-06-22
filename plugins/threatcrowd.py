@@ -97,7 +97,7 @@ class threatcrowdemail(WillPlugin):
                     # Find corresponding domain name for given coordinates
                     def find_domain(coordinates):
                         for m in range(0, count):
-                            if coordinates[0] == int(coords[m][0]) and coordinates[1] == int(coords[m][1]):
+                            if coordinates[0] == coords[m][0] and coordinates[1] == coords[m][1]:
                                 return str(j['domains'][m])
 
                     def find_result(X, k):
