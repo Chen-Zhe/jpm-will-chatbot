@@ -5,8 +5,8 @@ import random
 
 
 email = "domainregistration@jpmchase.com"
-result = requests.get("https://www.threatcrowd.org/searchApi/v2/email/report/", params={"email": email})
-j = json.loads(result.text)
+req = requests.get("https://www.threatcrowd.org/searchApi/v2/email/report/", params={"email": email})
+j = json.loads(req.text)
 K=3
 
 #compute distance between two domains
@@ -116,7 +116,7 @@ def find_domain(coordinates):
 
 def find_result(X, k):
     (M, C) = find_centroids(X, k)
-    result = C
+    result = {}
     # change to integer coordinates
     for l in range(0, k):
         for point_index in range(0, len(C[l])):
@@ -128,12 +128,13 @@ def find_result(X, k):
             dis_array.append(Eu_distance(point, M[i]))
         index = dis_array.index(min(dis_array))
         # Store center
-        result[i].pop(index)
-        result[i].insert(0, [C[i][index][0], C[i][index][1], find_domain(C[i][index])])
+        center_point = C[i][index]
+        result[str(i)] = [[center_point[0], center_point[1], find_domain(center_point)]]
+
         for k in range(0, len(C[i])):
-            if k != index and k <= 3:
+            if k != index:
                 # Store first 3 non-center domains
-                result[i][k] = [C[i][k][0], C[i][k][1], find_domain(C[i][k])]
+                result[str(i)].append([C[i][k][0], C[i][k][1], find_domain(C[i][k])])
 
     return result
 
@@ -141,7 +142,9 @@ def find_result(X, k):
 
 R = find_result(coords,K)
 
-print R
+print json.dumps(R)
+
+
 
 #print result[0].x_coordinate
 #print result[0].y_coordinate

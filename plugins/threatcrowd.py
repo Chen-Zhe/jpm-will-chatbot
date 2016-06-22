@@ -114,7 +114,7 @@ class threatcrowdemail(WillPlugin):
 
                     def find_result(X, k):
                         (M, C) = find_centroids(X, k)
-                        result = C
+                        result = {}
                         # change to integer coordinates
                         for l in range(0, k):
                             for point_index in range(0, len(C[l])):
@@ -126,13 +126,13 @@ class threatcrowdemail(WillPlugin):
                                 dis_array.append(Eu_distance(point, M[i]))
                             index = dis_array.index(min(dis_array))
                             # Store center
-                            result[i].pop(index)
-                            result[i].insert(0,[C[i][index][0], C[i][index][1],find_domain(C[i][index])])
-                            for k in range(0, len(C[i])):
-                                if k != index and k <= 3:
-                                    # Store first 3 non-center domains
-                                    result[i][k]=[C[i][k][0],C[i][k][1],find_domain(C[i][k])]
+                            center_point = C[i][index]
+                            result[str(i)] = [[center_point[0], center_point[1], find_domain(center_point)]]
 
+                            for k in range(0, len(C[i])):
+                                if k != index:
+                                    # Store first 3 non-center domains
+                                    result[str(i)].append([C[i][k][0], C[i][k][1], find_domain(C[i][k])])
 
                         return result
 
@@ -163,7 +163,7 @@ class threatcrowdemail(WillPlugin):
                                                                                    "[.]") + "\nTotal number of domains: " + str(
                         count) + "\n" + "Most recently registered domains: " + domainlist +"url: localhost:9000/visualize/123"
 
-                    self.save("123", json.dumps(result))
+                    self.save("123", json.dumps(output_data))
 
 
                 else:
@@ -187,6 +187,6 @@ class threatcrowdemail(WillPlugin):
 
 
 
-#s = threatcrowdemail()
-#s.check_email("eee","domainregistration@jpmchase.com")
+s = threatcrowdemail()
+s.check_email("eee","domainregistration@jpmchase.com")
 
