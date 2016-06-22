@@ -111,38 +111,37 @@ class domain_coordinates:
 def find_domain(coordinates):
     for m in range(0,count):
         if coordinates[0]==int(coords[m][0]) and coordinates[1]==int(coords[m][1]):
-            return j['domains'][m]
+            return str(j['domains'][m])
 
 
 def find_result(X, k):
-    (M,C)=find_centroids(X, k)
-    result=[]
-    #change to integer coordinates
+    (M, C) = find_centroids(X, k)
+    result = C
+    # change to integer coordinates
     for l in range(0, k):
         for point_index in range(0, len(C[l])):
-            C[l][point_index] = [int(C[l][point_index][0]),int(C[l][point_index][1])]
-    #find acutal center
+            C[l][point_index] = [int(C[l][point_index][0]), int(C[l][point_index][1])]
+    # find acutal center
     for i in range(0, k):
-        dis_array=[]
+        dis_array = []
         for point in C[i]:
             dis_array.append(Eu_distance(point, M[i]))
-        index=dis_array.index(min(dis_array))
+        index = dis_array.index(min(dis_array))
         # Store center
-        result.append(domain_coordinates(C[i][index][0],C[i][index][1],i,find_domain(C[i][index]),1))
-        for k in range(0,len(C[i])):
-            if k!= index:
-                if k<=3:
-                    # Store first 3 non-center domains
-                    result.append(domain_coordinates(C[i][k][0],C[i][k][1],i,find_domain(C[i][k]),0))
-                else:
-                    # Store other non-center domains
-                    result.append(domain_coordinates(C[i][k][0],C[i][k][1],i,"",0))
+        result[i].pop(index)
+        result[i].insert(0, [C[i][index][0], C[i][index][1], find_domain(C[i][index])])
+        for k in range(0, len(C[i])):
+            if k != index and k <= 3:
+                # Store first 3 non-center domains
+                result[i][k] = [C[i][k][0], C[i][k][1], find_domain(C[i][k])]
 
     return result
 
 
 
-result.save = find_result(coords,K)
+R = find_result(coords,K)
+
+print R
 
 #print result[0].x_coordinate
 #print result[0].y_coordinate
