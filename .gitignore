@@ -12,3 +12,4 @@ run_will.py
 
 dump.rdb
 nohup.out
+.gitignore

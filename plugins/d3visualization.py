@@ -7,4 +7,5 @@ class D3visualization(WillPlugin):
     @route("/visualize/<graph_id>", method="GET")
     @rendered_template("d3.html")
     def renderD3(self, graph_id):
-        return {}
+
+        return {"data": self.load(graph_id)}

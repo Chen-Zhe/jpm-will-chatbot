@@ -8,8 +8,6 @@ import random
 
 class threatcrowdemail(WillPlugin):
 
-
-
     @hear("~email(-tc)? (?P<input>.*)")
     def check_email(self, message, input):
 
@@ -96,16 +94,6 @@ class threatcrowdemail(WillPlugin):
                         dist = np.sqrt(pow((P1[0] - P2[0]), 2) + pow((P1[1] - P2[1]), 2))
                         return dist
 
-                    class domain_coordinates:
-                        'for storing domain instances'
-
-                        def __init__(self, x_coordinate, y_coordinate, cluster, domain_name, is_center):
-                            self.x_coordinate = x_coordinate
-                            self.y_coordinate = y_coordinate
-                            self.cluster = cluster
-                            self.domain_name = domain_name
-                            self.is_center = is_center
-
                     # Find corresponding domain name for given coordinates
                     def find_domain(coordinates):
                         for m in range(0, count):
@@ -114,11 +102,12 @@ class threatcrowdemail(WillPlugin):
 
                     def find_result(X, k):
                         (M, C) = find_centroids(X, k)
-                        result = {}
+
                         # change to integer coordinates
                         for l in range(0, k):
                             for point_index in range(0, len(C[l])):
-                                C[l][point_index] = [int(C[l][point_index][0]), int(C[l][point_index][1])]
+                                C[l][point_index] = [int(C[l][point_index][0]), int(C[l][point_index][1]), find_domain(C[l][point_index])]
+
                         # find acutal center
                         for i in range(0, k):
                             dis_array = []
@@ -126,15 +115,11 @@ class threatcrowdemail(WillPlugin):
                                 dis_array.append(Eu_distance(point, M[i]))
                             index = dis_array.index(min(dis_array))
                             # Store center
-                            center_point = C[i][index]
-                            result[str(i)] = [[center_point[0], center_point[1], find_domain(center_point)]]
+                            center_point = C[i].pop(index)
+                            C[i].insert(0, center_point)
+                            C[str(i)] = C.pop(i)
 
-                            for k in range(0, len(C[i])):
-                                if k != index:
-                                    # Store first 3 non-center domains
-                                    result[str(i)].append([C[i][k][0], C[i][k][1], find_domain(C[i][k])])
-
-                        return result
+                        return C
 
                     for count_index1 in range(0, count):
                         tmp = []
@@ -161,7 +146,7 @@ class threatcrowdemail(WillPlugin):
 
                     response = "ThreatCrowd Scan Result\n" + "Email: " + email.replace(".",
                                                                                    "[.]") + "\nTotal number of domains: " + str(
-                        count) + "\n" + "Most recently registered domains: " + domainlist +"url: localhost:9000/visualize/123"
+                        count) + "\n" + "Most recently registered domains: " + domainlist +"\nurl: localhost:9000/visualize/123"
 
                     self.save("123", json.dumps(output_data))
 
@@ -173,20 +158,4 @@ class threatcrowdemail(WillPlugin):
 
             self.reply(message, response)
 
-
-
-
-
-
-
-
-
-
-
-        #print response
-
-
-
-s = threatcrowdemail()
-s.check_email("eee","domainregistration@jpmchase.com")
 
