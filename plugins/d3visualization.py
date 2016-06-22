@@ -1,6 +1,7 @@
 from will.plugin import WillPlugin
 from will.decorators import respond_to, periodic, hear, randomly, route, rendered_template, require_settings
 
+import base64
 
 class D3visualization(WillPlugin):
 
@@ -8,4 +9,4 @@ class D3visualization(WillPlugin):
     @rendered_template("d3.html")
     def renderD3(self, graph_id):
 
-        return {"data": self.load(graph_id)}
+        return {"data": self.load(graph_id), "email": base64.b64decode(graph_id)}

@@ -4,7 +4,7 @@ import requests, json
 import numpy as np
 from sklearn import manifold
 import random
-
+import base64
 
 class threatcrowdemail(WillPlugin):
 
@@ -144,11 +144,13 @@ class threatcrowdemail(WillPlugin):
 
                     output_data = find_result(coords, K)
 
+                    encoded_email_key = base64.b64encode(email)
+
                     response = "ThreatCrowd Scan Result\n" + "Email: " + email.replace(".",
                                                                                    "[.]") + "\nTotal number of domains: " + str(
-                        count) + "\n" + "Most recently registered domains: " + domainlist +"\nurl: localhost:9000/visualize/123"
+                        count) + "\n" + "Most recently registered domains: " + domainlist +"\nurl: localhost:9000/visualize/"+encoded_email_key
 
-                    self.save("123", json.dumps(output_data))
+                    self.save(encoded_email_key, json.dumps(output_data))
 
 
                 else:
