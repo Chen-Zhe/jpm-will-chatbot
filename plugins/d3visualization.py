@@ -2,9 +2,9 @@ from will.plugin import WillPlugin
 from will.decorators import respond_to, periodic, hear, randomly, route, rendered_template, require_settings
 
 
-class D3visualizationPlugin(WillPlugin):
+class D3visualization(WillPlugin):
 
-    @route("/d3draw")
+    @route("/visualize/<graph_id>", method="GET")
     @rendered_template("d3.html")
-    def renderD3(self):
+    def renderD3(self, graph_id):
         return {}
