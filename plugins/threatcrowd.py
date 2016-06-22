@@ -161,7 +161,7 @@ class threatcrowdemail(WillPlugin):
                     results = mds.fit(adist)
                     coords = results.embedding_
 
-                    result = find_result(coords, K)
+                    output_data = find_result(coords, K)
 
                     response = "ThreatCrowd Scan Result\n" + "Email: " + email.replace(".",
                                                                                    "[.]") + "\nTotal number of domains: " + str(
