@@ -32,7 +32,7 @@ class SiteReview(object):
     def check_response(self, response):
 
         if self.req.status_code != 200:
-            sys.exit("[-] HTTP {} returned".format(req.status_code))
+            sys.exit("[-] HTTP {} returned".format(response.status_code))
 
         elif "error" in response:
             sys.exit(response["error"])
