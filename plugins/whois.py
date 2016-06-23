@@ -42,7 +42,7 @@ class whois(WillPlugin):
                         else:
                             admin_info="NIL"
 
-                    reply = "Whois domain record\n" \
+                    reply = "Whois Domain Record\n" \
                             "URL: {site}\n" \
                             "Date Created: {date_created}\n" \
                             "Date Updated: {date_updated}\n\n" \
