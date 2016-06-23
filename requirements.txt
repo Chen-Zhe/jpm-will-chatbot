@@ -2,6 +2,7 @@ will
 virustotal-api
 requests
 requests[security]
-sklearn
-numpy
 scipy
+numpy
+sklearn
+
