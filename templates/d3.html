@@ -9,22 +9,13 @@
 <h1>Email Reverse Lookup Visualization of {{email}}</h1>
 <script>
 
-
-
-
 			input_data=JSON.parse(' {{ data|safe }} ');
-
-
 
 			var svgContainer = d3.select("body").append("svg")
                 	                     .attr("width", 1000)
                 	                     .attr("height",1000);
 
-
-
-
-			var spaceCircles = []
-
+			var spaceCircles = [];
             for (group=0; group<3 ;group++){
 
                 for (index=0; index < input_data[group].length; index++){
@@ -33,10 +24,7 @@
                 }
 
             }
-
-
-
-
+			
  			var circles = svgContainer.selectAll("circle")
                 	           .data(spaceCircles)
                 	           .enter()
@@ -52,32 +40,30 @@
 
             //The data for our line
 
-            var lineData0 = []
-            var lineData1 = []
-            var lineData2 = []
+            var lineData0 = [];
+            var lineData1 = [];
+            var lineData2 = [];
 
             for (group0_index = 1; group0_index < input_data[0].length; group0_index++){
 
-                lineData0.push([input_data[0][group0_index][0], input_data[0][group0_index][1]])
+                lineData0.push([input_data[0][group0_index][0], input_data[0][group0_index][1]]);
                 lineData0.push([input_data[0][0][0], input_data[0][0][1]])
 
             }
 
             for (group1_index = 1; group1_index < input_data[1].length; group1_index++){
 
-                lineData1.push([input_data[1][group1_index][0], input_data[1][group1_index][1]])
+                lineData1.push([input_data[1][group1_index][0], input_data[1][group1_index][1]]);
                 lineData1.push([input_data[1][0][0], input_data[1][0][1]])
 
             }
 
             for (group2_index = 1; group2_index < input_data[2].length; group2_index++){
 
-                lineData2.push([input_data[2][group2_index][0], input_data[2][group2_index][1]])
+                lineData2.push([input_data[2][group2_index][0], input_data[2][group2_index][1]]);
                 lineData2.push([input_data[2][0][0], input_data[2][0][1]])
 
             }
-
-
 
 
 			var g = svgContainer.append("svg:g")
@@ -102,15 +88,12 @@
                         	    .attr("stroke-width", 1.5)
                             	.attr("fill", "none");
 
+			/*var center1=input_data[0].shift()*/
+            var group0=input_data[0];
+           	var group1=input_data[1];
+           	var group2=input_data[2];
 
-           	/*var center1=input_data[0].shift()*/
-            var group0=input_data[0]
-           	var group1=input_data[1]
-           	var group2=input_data[2]
-
-           	var textdata=group0.concat(group1,group2)
-
-
+           	var textdata=group0.concat(group1,group2);
 
 //Add the SVG Text Element to the svgContainer
 			var text = svgContainer
@@ -121,7 +104,6 @@
                         .enter()
                         .append("text");
 
-
 //Add SVG Text Element Attributes
 			var textLabels = text
                             .attr("x", function(d) { return d[0]*2; })
@@ -131,14 +113,6 @@
                             .attr("font-size", "3px")
                             .attr("text-anchor", "middle")
                             .attr("fill", "black");
-
-
-
-
-
-
-
-
 
 	</script>
 </body>
