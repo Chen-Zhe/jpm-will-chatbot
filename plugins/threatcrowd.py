@@ -148,7 +148,7 @@ class threatcrowdemail(WillPlugin):
 
                     response = "ThreatCrowd Scan Result\n" + "Email: " + email.replace(".",
                                                                                    "[.]") + "\nTotal number of domains: " + str(
-                        count) + "\n" + "Most recently registered domains: " + domainlist +"\nurl: localhost:9000/visualize/"+encoded_email_key
+                        count) + "\n" + "Most recently registered domains: " + domainlist +"\nurl: http://localhost:9000/visualize/"+encoded_email_key
 
                     self.save(encoded_email_key, json.dumps(output_data))
 
