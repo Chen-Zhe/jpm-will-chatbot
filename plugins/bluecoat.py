@@ -25,8 +25,7 @@ class SiteReview(object):
                                     data=payload
                                     )
         except requests.ConnectionError:
-            sys.exit("[-] ConnectionError: " \
-                     "A connection error occurred")
+            sys.exit("[-] ConnectionError: A connection error occurred")
 
         return json.loads(self.req.content)
 
