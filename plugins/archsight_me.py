@@ -2,9 +2,12 @@ from will.plugin import WillPlugin
 from will.decorators import respond_to, periodic, hear, randomly, route, rendered_template, require_settings
 
 archsight_db = [{"case_id": "AS-3233", "sid": "R601601", "severity": "medium", "ip": ["123.123.123.123", "69.69.69.69"],
-                 "md5": ["md5md5md5md5"], "c2": ["secret.myftp.org"]},
+                 "md5": ["md5md5md5md5oooooo"], "c2": ["secret.myftp.org"]},
                 {"case_id": "AS-3222", "sid": "D525656", "severity": "high", "ip": ["123.23.3.3", "8.8.8.9"],
-                 "md5": ["md5md5md5mdexample"], "c2": ["my.c2.cnc"]}, ]
+                 "md5": ["md5md5md5mdexample"], "c2": ["my.c2.cnc"]},
+                {"case_id": "AS-3221", "sid": "G596556", "severity": "low", "ip": ["169.8.3.3", "63.12.10.3"],
+                 "md5": ["md5md5md5lolllllll"], "c2": ["my.c3.sg"]},
+                ]
 
 class ArchMePlugin(WillPlugin):
 
