@@ -24,5 +24,6 @@ class HistoryPlugin(WillPlugin):
                 self.reply(message, "Cannot find the same IOC query in the past 100 messages")
             else:
                 self.reply(message, reply)
+
         except:
             self.reply(message, "Error: please try again")
