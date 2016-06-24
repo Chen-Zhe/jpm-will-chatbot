@@ -21,20 +21,23 @@ class ArchMePlugin(WillPlugin):
                         break
             if match:
                 match_cases.append(case)
-        reply = "There are {num_of_matches} matched cases. \n".format(num_of_matches=len(match_cases))
-        for match_case in match_cases:
-            reply = reply +  "Case ID: {case_id} \n" \
-                    "SID: {sid} \n" \
-                    "Severity: {severity} \n" \
-                    "IP: {ip} \n" \
-                    "MD5: {md5} \n" \
-                    "C2: {c2} \n \n".format(case_id = match_case.get("case_id"),
-                                      sid = match_case.get("sid"),
-                                      severity = match_case.get("severity"),
-                                      ip = match_case.get("ip"),
-                                      md5 = match_case.get("md5"),
-                                      c2 = match_case.get("c2"))
-        self.reply(message, reply)
+        if (len(match_cases) == 0):
+            self.reply(message, "There are no matched past cases.")
+        else:
+            reply = "There are {num_of_matches} matched case(s). \n".format(num_of_matches=len(match_cases))
+            for match_case in match_cases:
+                reply = reply +  "Case ID: {case_id} \n" \
+                        "SID: {sid} \n" \
+                        "Severity: {severity} \n" \
+                        "IP: {ip} \n" \
+                        "MD5: {md5} \n" \
+                        "C2: {c2} \n \n".format(case_id = match_case.get("case_id"),
+                                          sid = match_case.get("sid"),
+                                          severity = match_case.get("severity"),
+                                          ip = match_case.get("ip"),
+                                          md5 = match_case.get("md5"),
+                                          c2 = match_case.get("c2"))
+            self.reply(message, reply)
 
 
 

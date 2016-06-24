@@ -12,7 +12,9 @@ class HelpPlugin(WillPlugin):
 							"\t ~url \t< url >\n" \
 							"\t ~md5 \t< md5 >\n" \
 							"\t ~exp \t< shorten-url >\n" \
-							"\t ~find \t< any ioc >\n" \
+							"\t ~find \t< IOC >\n" \
 							"\t ~email \t< example@example.com >\n" \
-							"\t ~b64 <encode/decode> <text> \n" \
-					)
+							"\t ~b64 < encode/decode > < text > \n" \
+                            "\t ~archme \t< IOC(s) > \n" \
+                            "\t ~intelme \t< IOC(s) >\n" \
+                   )
