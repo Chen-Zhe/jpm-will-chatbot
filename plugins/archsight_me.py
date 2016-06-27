@@ -27,7 +27,10 @@ class ArchMePlugin(WillPlugin):
         if (len(match_cases) == 0):
             self.reply(message, "There are no matched past cases.")
         else:
-            reply = "There are {num_of_matches} matched case(s). \n".format(num_of_matches=len(match_cases))
+            if len(match_cases) == 1:
+                reply = "There is 1 matched case. \n"
+            else:
+                reply = "There are {num_of_matches} matched cases. \n".format(num_of_matches=len(match_cases))
             for match_case in match_cases:
                 reply = reply +  "Case ID: {case_id} \n" \
                         "SID: {sid} \n" \
