@@ -5,8 +5,9 @@ from will.decorators import respond_to, periodic, hear, randomly, route, rendere
 class HelpPlugin(WillPlugin):
 
     @hear("^~help")
-    def help(self, message):
-        self.reply(message, "\nNoblesse oblige:\n" \
+    def help_reply(self, message):
+
+		self.reply(message,"\nNoblesse oblige:\n" \
 							"\t ~help \n" \
 							"\t ~ip \t< ip_addr > \n" \
 							"\t ~url \t< url >\n" \
@@ -15,6 +16,5 @@ class HelpPlugin(WillPlugin):
 							"\t ~find \t< IOC >\n" \
 							"\t ~email \t< example@example.com >\n" \
 							"\t ~b64 < encode/decode > < text > \n" \
-                            "\t ~archme \t< IOC(s) > \n" \
-                            "\t ~intelme \t< IOC(s) >\n" \
-                   )
+				            "\t ~archme \t< IOC(s) > \n" \
+				            "\t ~intelme \t< IOC(s) >\n" )
