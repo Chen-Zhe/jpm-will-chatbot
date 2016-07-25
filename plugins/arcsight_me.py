@@ -1,21 +1,21 @@
 from will.plugin import WillPlugin
 from will.decorators import respond_to, periodic, hear, randomly, route, rendered_template, require_settings
 
-archsight_db = [{"case_id": "AS-3233", "sid": "R601601", "severity": "medium", "ip": ["123.123.123.123", "69.69.69.69"],
+arcsight_db = [{"case_id": "AS-3233", "sid": "R601601", "severity": "medium", "ip": ["123.123.123.123", "69.69.69.69"],
                  "md5": ["md5md5md5md5oooooo"], "c2": ["secret.myftp.org"]},
-                {"case_id": "AS-3222", "sid": "D525656", "severity": "high", "ip": ["123.23.3.3", "8.8.8.9"],
+               {"case_id": "AS-3222", "sid": "D525656", "severity": "high", "ip": ["123.23.3.3", "8.8.8.9"],
                  "md5": ["md5md5md5mdexample"], "c2": ["my.c2.cnc"]},
-                {"case_id": "AS-3221", "sid": "G596556", "severity": "low", "ip": ["169.8.3.3", "63.12.10.3"],
+               {"case_id": "AS-3221", "sid": "G596556", "severity": "low", "ip": ["169.8.3.3", "63.12.10.3"],
                  "md5": ["md5md5md5lolllllll"], "c2": ["my.c3.sg"]},
-                ]
+               ]
 
-class ArchMePlugin(WillPlugin):
+class ArcMePlugin(WillPlugin):
 
-    @hear("~archme (?P<input>.*)")
+    @hear("~arcme (?P<input>.*)")
     def find_IOC(self, message, input):
         input_list = [input_item.strip() for input_item in input.split(',')]
         match_cases = []
-        for case in archsight_db:
+        for case in arcsight_db:
             match = False
             for input_item in input_list:
                 for key in case:

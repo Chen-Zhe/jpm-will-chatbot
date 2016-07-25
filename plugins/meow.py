@@ -4,7 +4,7 @@ from will.decorators import respond_to, periodic, hear, randomly, route, rendere
 
 class MeowPlugin(WillPlugin):
 
-    @hear("^meow")
+    @hear("^~meow")
     def meow(self, message):
         self.reply(message, "meow meow meow!")
 

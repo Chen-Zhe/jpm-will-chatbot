@@ -37,7 +37,7 @@ class threatcrowdemail(WillPlugin):
 
                     self.save(email, j["domains"])
 
-                    response += "\nurl: http://localhost:"+config.HTTPSERVER_PORT+"/visualize/"+encoded_email_key
+                    response += "\nClustering Result: http://localhost:"+config.HTTPSERVER_PORT+"/visualize/"+encoded_email_key
 
 
             self.reply(message, response)
